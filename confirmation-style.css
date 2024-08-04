@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, black, #FFDD44, #FFD700, #556B2F);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.confirmation-container {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    width: 400px;
+    margin: 0 20px; /* Menambahkan gap pada kedua sisi */
+}
+
+.confirmation-container h1 {
+    margin: 0 0 20px 0;
+    font-size: 2em;
+}
+
+.confirmation-container p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Media Query untuk ukuran layar yang lebih kecil */
+@media (max-width: 600px) {
+    .confirmation-container {
+        padding: 15px;
+        width: calc(100% - 40px); /* Memastikan ada gap pada kedua sisi */
+        margin: 0 20px; /* Memastikan ada gap pada kedua sisi */
+    }
+
+    .confirmation-container h1 {
+        font-size: 1.5em;
+    }
+
+    .confirmation-container p {
+        font-size: 1em;
+    }
+}

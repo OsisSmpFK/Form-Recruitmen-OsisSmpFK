@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rekrutmen Osis Magang</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="contact-container">
+        <form method="POST" enctype="multipart/form-data" class="contact-left" name="form-osis" id="osisForm">
+            <div class="contact-left-title">
+                <h2>Rekrutmen Osis</h2>
+                <hr>
+            </div>
+            <input type="text" name="nama" placeholder="Nama" class="contact-inputs" required>
+            <label for="Kelas">
+                <select name="kelas" id="" class="contact-inputs">
+                    <option value="Kelas" class="contact-inputs">Kelas</option>
+                    <option value="Bajjah" class="contact-inputs">8 Ibnu Bajjah</option>
+                    <option value="Haitsam" class="contact-inputs">8 Ibnu Haitsam</option>
+                    <option value="Hayyan" class="contact-inputs">8 Ibnu Hayyan</option>
+                    <option value="Thufail" class="contact-inputs">8 Ibnu Thufail</option>
+                </select>
+            </label>
+            <input type="email" name="email" placeholder="Akun Gmail" class="contact-inputs" required>
+            <textarea name="alasan-bergabung" placeholder="Alasan ingin bergabung dengan osis" class="contact-inputs" required></textarea>
+
+            <hr class="contact-left">
+            <aside class="contact-p">
+               <p>Dengan ini saya sebagai calon anggota OSIS berjanji untuk menjadi siswa teladan,
+                 tepat waktu menuntaskan tugas mata pelajaran, mematuhi aturan perilaku dan seragam sekolah,
+                  serta turut aktif di semua program organisasi.
+
+                  Apabila ternyata berulang kali saya melanggar
+                   hal-hal di atas, maka saya siap diberhentikan
+                    dari keanggotaan OSIS dengan kerelaan hati.
+            </p>
+        
+            </aside>
+            <input name="pernyataan" placeholder="TULIS ULANG PERNYATAAN DIATAS" class="contact-inputs" required></input>
+            <label for="file-input" class="drop-container">
+                <h5 >Mohon upload foto surat izin mendaftar OSIS dari orang tua dengan tulisan tangan singkat dan tanda tangan calon peserta</h5>
+                <input class="contact-input-file" type="file" name="parentPermission" id="parentPermission" required>
+            </label>
+            
+            
+            
+            <button class="btn-kirim" type="submit">Submit</button>
+        </form>
+        <div class="contact-right">
+            <img src="assets/WhatsApp_Image_2024-01-12_at_17.09.14-removebg.png" alt="">
+        </div>
+    </div>
+    <footer></footer>
+    <div id="loading" class="loading-container" style="display: none;">
+        <div class="loader">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+
+        </div>
+    </footer>
+    
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyClUiqKD9LUyr8kvZ2VtbuPiUJmLR8WDKsVJs_btThUrsuiakZ8vyNw8wuO36wstnt/exec'; // Ganti dengan URL Web App kamu
+        const form = document.getElementById('osisForm');
+        const loading = document.getElementById('loading');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            loading.style.display = 'flex';
+
+            const fileInput = document.getElementById('parentPermission');
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const base64Data = reader.result.split(',')[1];
+                submitForm(base64Data);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function submitForm(base64Data) {
+            const formData = new FormData(form);
+            formData.append('fileData', base64Data);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    console.log('Success!', response);
+                    window.location.href = 'confirmation.html'; // Pengalihan ke halaman konfirmasi
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    loading.style.display = 'none';
+                });
+        }
+    </script>
+</body>
+</html>
